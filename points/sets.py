@@ -28,6 +28,8 @@ class PointSet(BasePointSet):
             self.set_points_from_dicts_list(points_list)
         elif type(points_list[0]) == tuple:
             self.set_points_from_tuples_list(points_list)
+        elif type(points_list[0]) == list:
+            self.set_points_from_tuples_list(points_list)
         elif isinstance(points_list[0], BasePoint):
             self._points = points_list
         else:
