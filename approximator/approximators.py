@@ -213,7 +213,7 @@ class IndicativeFunc2DApproximator(BasePointsApproximator):
 
         a = self.d1 / self.d
         b = self.d2 / self.d
-        print(a)
+        print(e ** a)
         print(b)
         return (e ** a, e ** b)
 
