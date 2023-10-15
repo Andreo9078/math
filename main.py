@@ -50,10 +50,11 @@ for func, func_name in approx_funcs:
         pass
 
     print(f"\n{func_name}\n"
-          f"err = {round(func.get_aprox_err()*100, 3)} %\n"
+          f"{sums}\n"
           f"{dets}\n"
           f"{coefs}\n"
-          f"{sums}")
+          f"err = {round(func.get_aprox_err() * 100, 3)} %"
+          )
     plt.plot(xy[0], xy[1], label=label)
 
 plt.legend()
