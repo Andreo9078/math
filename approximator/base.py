@@ -10,11 +10,9 @@ class BasePointsApproximator(ABC):
     def __init__(self, point_set: BasePointSet):
         self.point_set = point_set
 
-
     @abstractmethod
     def get_coefs(self):
         pass
-
 
     @abstractmethod
     def get_approximate_func(self):
@@ -22,7 +20,12 @@ class BasePointsApproximator(ABC):
 
     @abstractmethod
     def get_aprox_err(self):
-        pass
+        coefs = self.get_coefs()
+        s = 0
+        for point in self.point_set:
+            s += (abs(point.y - self.get_y(point.x, coefs)))/point.y
+
+        return s/len(self.point_set)
 
     @abstractmethod
     def get_y(self, x, coefs):
