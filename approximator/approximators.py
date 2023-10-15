@@ -91,7 +91,7 @@ class PowerFunc2DApproximator(BasePointsApproximator, LineFuncRegCoefsMixin):
         x, y = self.point_set.get_x_y_lists()
         x_mid = sum(x) / len(x)
         x_lst = numpy.linspace(x[0] - x_mid, x[-1] + x_mid, 100)
-        y_lst = coefs[0] * (pow(abs(x_lst), coefs[1]))
+        y_lst = coefs[0] * (pow(x_lst, coefs[1]))
 
         return [x_lst, y_lst]
 
