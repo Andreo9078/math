@@ -40,9 +40,3 @@ class BasePointsApproximator(ABC):
         y_lst = self.get_y(x_lst, coefs)
 
         return [x_lst, y_lst]
-
-
-class BaseMathFunction(ABC):
-    @abstractmethod
-    def get_xy_list(self):
-        pass

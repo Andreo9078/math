@@ -7,7 +7,7 @@ from points.creators import Point2DCreator
 from approximator.approximators import LineFunc2DApproximator, QuadraticFunc2DApproximator, PowerFunc2DApproximator, IndicativeFunc2DApproximator
 
 
-points_lst = [(3, 3.5), (5, 4.4), (7, 5.7), (9, 6.1), (11, 6.5), (13, 7.3)]
+points_lst = [(2, 3.1), (6, 6.7), (10, 9.5), (14, 11.9), (18, 14), (22, 15.5)]
 point_set = PointSet(Point2DCreator())
 point_set.points = points_lst
 

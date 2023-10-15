@@ -8,13 +8,13 @@ from points.base import BasePointSet
 
 class LineFuncRegCoefsMixin:
     def get_main_d(self):
-        return (self.x_sum ** 2 - len(self.point_set) * self.x2_sum)
+        return (len(self.point_set) * self.x2_sum - self.x_sum ** 2)
 
     def get_a_d(self):
-        return (self.x_sum * self.y_sum - len(self.point_set) * self.xy_sum)
+        return (len(self.point_set) * self.xy_sum - self.x_sum * self.y_sum)
 
     def get_b_d(self):
-        return (self.x_sum * self.xy_sum - self.x2_sum * self.y_sum)
+        return (self.x2_sum * self.y_sum - self.x_sum * self.xy_sum)
 
     def get_coefs(self):
         d = self.get_main_d()
