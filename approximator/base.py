@@ -1,3 +1,4 @@
+import numpy
 from abc import ABC, abstractmethod
 
 
@@ -19,10 +20,23 @@ class BasePointsApproximator(ABC):
     def get_approximate_func(self):
         pass
 
+    @abstractmethod
+    def get_aprox_err(self):
+        pass
+
+    @abstractmethod
+    def get_y(self, x, coefs):
+        pass
 
     @abstractmethod
     def get_xy_lists(self):
-        pass
+        coefs = self.get_coefs()
+        x, y = self.point_set.get_x_y_lists()
+        x_mid = sum(x) / len(x)
+        x_lst = numpy.linspace(x[0] - x_mid, x[-1] + x_mid, 100)
+        y_lst = self.get_y(x_lst, coefs)
+
+        return [x_lst, y_lst]
 
 
 class BaseMathFunction(ABC):

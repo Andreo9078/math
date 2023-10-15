@@ -9,6 +9,7 @@ class LineFuncRegCoefsMixin:
     def get_main_det(self):
         return (self.x_sum ** 2 - len(self.point_set) * self.x2_sum)
 
+
     def get_a_det(self):
         return (self.x_sum * self.y_sum - len(self.point_set) * self.xy_sum)
 
@@ -30,7 +31,6 @@ class LineFunc2DApproximator(BasePointsApproximator, LineFuncRegCoefsMixin):
         self.y_sum = 0
         self.xy_sum = 0
         self.x2_sum = 0
-
         self._culc_sums()
 
 
@@ -46,14 +46,17 @@ class LineFunc2DApproximator(BasePointsApproximator, LineFuncRegCoefsMixin):
         return LineFuncRegCoefsMixin.get_coefs(self)
 
 
-    def get_xy_lists(self):
-        coefs = self.get_coefs()
-        x, y = self.point_set.get_x_y_lists()
-        x_mid = sum(x)/len(x)
-        x_lst = numpy.linspace(x[0] - x_mid, x[-1] + x_mid, 100)
-        y_lst = coefs[0] * x_lst + coefs[1]
+    def get_y(self, x, coefs):
+        return coefs[0] * x + coefs[1]
 
-        return [x_lst, y_lst]
+
+    def get_xy_lists(self):
+        return super().get_xy_lists()
+
+
+    def get_aprox_err(self):
+        pass
+
 
     def get_approximate_func(self):
         coefs = self.get_coefs()
@@ -80,20 +83,23 @@ class PowerFunc2DApproximator(BasePointsApproximator, LineFuncRegCoefsMixin):
             self.x2_sum += numpy.log(point.x) ** 2
             self.xy_sum += numpy.log(point.x) * numpy.log(point.y)
 
+
     def get_coefs(self):
         b, a = LineFuncRegCoefsMixin.get_coefs(self)
 
         return (e ** a, b)
 
 
-    def get_xy_lists(self):
-        coefs = self.get_coefs()
-        x, y = self.point_set.get_x_y_lists()
-        x_mid = sum(x) / len(x)
-        x_lst = numpy.linspace(x[0] - x_mid, x[-1] + x_mid, 100)
-        y_lst = coefs[0] * (pow(x_lst, coefs[1]))
+    def get_y(self, x, coefs):
+        return coefs[0] * (x ** coefs[1])
 
-        return [x_lst, y_lst]
+
+    def get_xy_lists(self):
+        return super().get_xy_lists()
+
+
+    def get_aprox_err(self):
+        pass
 
 
     def get_approximate_func(self):
@@ -128,15 +134,16 @@ class IndicativeFunc2DApproximator(BasePointsApproximator, LineFuncRegCoefsMixin
         return (e ** a, b)
 
 
+    def get_y(self, x, coefs):
+        return coefs[0] * (e ** (coefs[1] * x))
+
 
     def get_xy_lists(self):
-        coefs = self.get_coefs()
-        x, y = self.point_set.get_x_y_lists()
-        x_mid = sum(x) / len(x)
-        x_lst = numpy.linspace(x[0] - x_mid, x[-1] + x_mid, 100)
-        y_lst = coefs[0] * (e **(coefs[1] * x_lst))
+        return super().get_xy_lists()
 
-        return [x_lst, y_lst]
+
+    def get_aprox_err(self):
+        pass
 
 
     def get_approximate_func(self):
@@ -193,14 +200,16 @@ class QuadraticFunc2DApproximator(BasePointsApproximator):
         return (round(self.d1/self.d, 3), round(self.d2/self.d, 3), round(self.d3/self.d, 3))
 
 
-    def get_xy_lists(self):
-        coefs = self.get_coefs()
-        x, y = self.point_set.get_x_y_lists()
-        x_mid = sum(x) / len(x)
-        x_lst = numpy.linspace(x[0] - x_mid, x[-1] + x_mid, 100)
-        y_lst = coefs[0] * (x_lst ** 2) + coefs[1] * x_lst + coefs[2]
+    def get_y(self, x, coefs):
+        return coefs[0] * (x ** 2) + coefs[1] * x + coefs[2]
 
-        return [x_lst, y_lst]
+
+    def get_xy_lists(self):
+        return super().get_xy_lists()
+
+
+    def get_aprox_err(self):
+        pass
 
 
     def get_approximate_func(self):
