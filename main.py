@@ -12,9 +12,9 @@ point_set = PointSet(Point2DCreator())
 point_set.points = points_lst
 
 approx_funcs = [(LineFunc2DApproximator(point_set), "Line Function"),
-                (QuadraticFunc2DApproximator(point_set), "Quadratic Function"),
                 (PowerFunc2DApproximator(point_set), "Power Function"),
-                (IndicativeFunc2DApproximator(point_set), "Indicative Function")]
+                (IndicativeFunc2DApproximator(point_set), "Indicative Function"),
+                (QuadraticFunc2DApproximator(point_set), "Quadratic Function"),]
 
 
 xy = point_set.get_x_y_lists()
@@ -50,10 +50,11 @@ for func, func_name in approx_funcs:
         pass
 
     print(f"\n{func_name}\n"
+          f"{func.get_approximate_func()}\n"
           f"{sums}\n"
           f"{dets}\n"
           f"{coefs}\n"
-          f"err = {round(func.get_aprox_err() * 100, 3)} %"
+          f"err = {round(func.get_aprox_err(), 3)}"
           )
     plt.plot(xy[0], xy[1], label=label)
 

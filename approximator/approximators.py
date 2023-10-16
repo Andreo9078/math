@@ -120,6 +120,7 @@ class IndicativeFunc2DApproximator(BasePointsApproximator, LineFuncRegCoefsMixin
         return (e ** a, b)
 
     def get_y(self, x, coefs):
+
         return coefs[0] * (e ** (coefs[1] * x))
 
     def get_xy_lists(self):
